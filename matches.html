@@ -1,0 +1,46 @@
+{% extends "index.html" %}
+
+{% block title %}
+    Current Matches
+{% endblock %}
+
+{% block body %}
+<table>
+    <tr>
+        <td><b>Undo?</b></td>
+        <td><b>ULAN ID</b></td>
+        <td><b>Artist Name</b></td>
+        <td><b>Nationality</b></td>
+        <td><b>Begin Date</b></td>
+        <td><b>End Date</b></td>
+    </tr>
+{% for match in matches %}
+    <tr>
+        <form action="{{ url_for('undo_match') }}" method="post">
+            <td> 
+                <input type="submit" value="Undo Match"/>
+            </td>
+            <td><a href="{{ match.ulan_id }}" target="_blank">
+                <input type="text" name="id" value="{{ match.ulan_id }}"/>
+            </a></td>
+            <td>
+                <input type="text" name="name" value="{{ match.artist_name }}"/>
+            </td>
+            <td>
+                <input type="text" name="nationality" value="{{ match.Nationality }}"/>
+            </td>
+            <td>
+                <input type="text" name="begin" value="{{ match.begin_date }}"/>
+            </td>
+            <td>
+                <input type="text" name="end" value="{{ match.end_date }}"/>
+            </td>
+        </form>
+    </tr>
+{% endfor %}
+</table>
+
+<form action="{{ url_for('back_to_artists') }}" method="post">
+    <input type="submit" value="Back to Artists"/>
+</form>
+{% endblock %}

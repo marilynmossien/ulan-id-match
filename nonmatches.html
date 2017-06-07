@@ -1,0 +1,46 @@
+{% extends "index.html" %}
+
+{% block title %}
+    Current Non-Matches
+{% endblock %}
+
+{% block body %}
+<table>
+    <tr>
+        <td><b>Undo?</b></td>
+        <td><b>ULAN ID</b></td>
+        <td><b>Artist Name</b></td>
+        <td><b>Nationality</b></td>
+        <td><b>Begin Date</b></td>
+        <td><b>End Date</b></td>
+    </tr>
+{% for nonmatch in nonmatches %}
+    <tr>
+        <form action="{{ url_for('undo_non_match') }}" method="post">
+            <td> 
+                <input type="submit" value="Undo Non-Match"/>
+            </td>
+            <td><a href="{{ nonmatch.ulan_id }}" target="_blank">
+                <input type="text" name="id" value="{{ nonmatch.ulan_id }}"/>
+            </a></td>
+            <td>
+                <input type="text" name="name" value="{{ nonmatch.artist_name }}"/>
+            </td>
+            <td>
+                <input type="text" name="nationality" value="{{ nonmatch.Nationality }}"/>
+            </td>
+            <td>
+                <input type="text" name="begin" value="{{ nonmatch.begin_date }}"/>
+            </td>
+            <td>
+                <input type="text" name="end" value="{{ nonmatch.end_date }}"/>
+            </td>
+        </form>
+    </tr>
+{% endfor %}
+</table>
+
+<form action="{{ url_for('back_to_artists') }}" method="post">
+    <input type="submit" value="Back to Artists"/>
+</form>
+{% endblock %}

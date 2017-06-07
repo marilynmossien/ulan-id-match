@@ -1,0 +1,53 @@
+{% extends "index.html" %}
+
+{% block title %}
+    Artists List
+{% endblock %}
+
+{% block body %}
+
+<table>
+    <tr>
+        <td><b></b></td>
+        <td><b>Match?</b></td>
+        <td><b>Ulan ID</b></td>
+        <td><b>Artist Name</b></td>
+        <td><b>Nationality</b></td>
+        <td><b>Begin Date</b></td>
+        <td><b>End Date</b></td>
+    </tr>
+{% for artist in artists %}
+    <tr>
+        <form action="{{ url_for('match') }}" method="post">
+            <td>
+                <input type="submit" value="Go"/>
+            </td>
+            <td>
+                <input type="radio" name="match?" value="notmatch" checked> Not Match <br>
+                <input type="radio" name="match?" value="match"> Match <br>
+            </td>
+            <td><a href="{{ artist.ulan_id }}" target="_blank" id="id">
+                <input type="text" name="id" value="{{ artist.ulan_id }}"/>
+            </a></td> 
+            <td>
+                <input type="text" name="name" value="{{ artist.artist_name }}"/>
+            </td> 
+            <td>
+                <input type="text" name="nationality" value="{{ artist.Nationality }}"/>
+            </td>
+            <td>
+                <input type="text" name="begin" value="{{ artist.begin_date }}"/>
+            </td>            <td>
+                <input type="text" name="end" value="{{ artist.end_date }}"/>
+            </td>
+        </form>
+    </tr>
+{% endfor %}
+</table>
+    <form action="{{ url_for('view_matches') }}" method="post">
+        <input type="submit" value="See Matches"/>
+    </form>
+    <form action="{{ url_for('view_nonmatches') }}" method="post">
+        <input type="submit" value="See Non-Matches"/>
+    </form>
+{% endblock %}
